@@ -1,4 +1,3 @@
-
 import telebot
 from telebot import types
 
@@ -32,7 +31,4 @@ def answer(message):
         bot.send_message(message.chat.id, '')
     elif message.text.lower() == 'пока':
         bot.send_message(message.chat.id, 'Пока!')
-
-
-
 bot.polling(none_stop=True, interval=0)
