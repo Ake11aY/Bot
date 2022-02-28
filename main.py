@@ -1,13 +1,24 @@
-import telebot, wikipedia, re
+
+import telebot
+from telebot import types
+
 # Создаем экземпляр бота
 bot = telebot.TeleBot('5248690115:AAG8LQrB0GIQh7MKOF_JUItcDF5qszINRUU')
 @bot.message_handler(commands=['start'])
-def start_message(message):
-    bot.send_message(message.chat.id, 'Привет!')
+def start(message):
+    keyboard = types.ReplyKeyboardMarkup()
+    keyboard.row("Как тебя зовут?", "/help", "/lobby")
+    bot.send_message(message.chat.id, 'Привет! Хочешь узнать свежую информацию о МТУСИ?', reply_markup=keyboard)
+
+@bot.message_handler(commands=['lobby'])
+def start(message):
+    keyboard = types.ReplyKeyboardMarkup()
+    keyboard.row("/start", "/help", "ВУЗ","Как тебя зовут?","Пока")
+    bot.send_message(message.chat.id, 'Выбери функцию, которой хочешь воспользоваться', reply_markup=keyboard)
 
 @bot.message_handler(commands=['help'])
 def start_message(message):
-    bot.send_message(message.chat.id, 'Я умею направлять людей. Напиши "вуз" и я скину ссылку на сайт твоего ВУЗа')
+    bot.send_message(message.chat.id, 'Я умею направлять людей. Напиши "вуз" или кликни на кнопку я скину ссылку на сайт твоего ВУЗа')
 
 @bot.message_handler(content_types=['text'])
 def answer(message):
